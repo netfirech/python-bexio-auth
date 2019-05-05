@@ -1,1 +1,1 @@
-# python-bexio-auth
+# Python Bexio Connector

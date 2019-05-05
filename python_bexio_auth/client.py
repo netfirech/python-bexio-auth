@@ -92,12 +92,11 @@ class BexioAuthClient:
         response = getattr(requests, method)(self._api_url(endpoint), params=data, headers=headers)
 
         if response.status_code == 401:
-            """ If request ist unauthorized try to refresh the accesstoken. Then retry the request """
+            """ If request ist unauthorized try to refresh the access token. Then retry the request """
             self._refresh_token()
-            self._request(method, endpoint, data)
+            return self._request(method, endpoint, data)
 
         if response.status_code not in (200, 201):
             raise Exception(f'Failed to query Bexio: {response.text}')
 
         return response.json()
-
